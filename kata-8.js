@@ -723,7 +723,7 @@ function betterThanAverage(classPoints, yourPoints) {
 function reverseWords(str) {
   return str.split(" ").reverse().join(" ");
 }
-console.log(reverseWords("hello world!"));
+// console.log(reverseWords("hello world!"));
 
 function bmi(weight, height) {
   let bmi = weight / Math.pow(height, 2);
@@ -734,4 +734,163 @@ function bmi(weight, height) {
     : bmi <= 30
     ? "Overweight"
     : "Obese";
+}
+function divisibleBy(numbers, divisor) {
+  return numbers.filter((x) => x % divisor === 0);
+}
+
+function powersOfTwo(n) {
+  let arr = [];
+  for (let i = 0; i <= n; i++) {
+    arr.push(Math.pow(2, i));
+  }
+  return arr;
+}
+function sumStr(a, b) {
+  return (+a + +b).toString();
+}
+// console.log(sumStr("1", "2"));
+
+function twoSort(s) {
+  return s.sort()[0].split("").join("***");
+}
+// console.log(
+//   twoSort([
+//     "bitcoin",
+//     "take",
+//     "over",
+//     "the",
+//     "world",
+//     "maybe",
+//     "who",
+//     "knows",
+//     "perhaps",
+//   ])
+// );
+
+function expressionMatter(a, b, c) {
+  let try1 = a + b + c;
+  let try2 = a * b * c;
+  let try3 = c * (a + b);
+  let try4 = a * (b + c);
+  let arr = [try1, try2, try3, try4];
+  return arr.sort((a, b) => a - b)[arr.length - 1];
+}
+// console.log(expressionMatter(3, 5, 7));
+
+function testEven(n) {
+  return n % 2 === 0;
+}
+
+function gooseFilter(birds) {
+  var geese = ["African", "Roman Tufted", "Toulouse", "Pilgrim", "Steinbacher"];
+  return birds.filter((x) => geese.includes(x) !== true);
+}
+// console.log(
+//   gooseFilter([
+//     "Mallard",
+//     "Hook Bill",
+//     "African",
+//     "Crested",
+//     "Pilgrim",
+//     "Toulouse",
+//     "Blue Swedish",
+//   ])
+// );
+
+function between(a, b) {
+  let result = [];
+  for (let i = a; i <= b; i++) {
+    result.push(i);
+  }
+  return result;
+}
+function move(position, roll) {
+  return position + roll * 2;
+}
+function distinct(a) {
+  return [...new Set(a)];
+}
+function goals(laLigaGoals, copaDelReyGoals, championsLeagueGoals) {
+  return [laLigaGoals, copaDelReyGoals, championsLeagueGoals].reduce(
+    (a, b) => a + b,
+    0
+  );
+}
+function sayHello(name, city, state) {
+  return `Hello, ${name.join(" ")}! Welcome to ${city}, ${state}!`;
+}
+
+//check for minSalary & maxSalary in the input objects
+//compare them
+/*return true if candidate's salary is 
+less than or equal maxSalary of th job */
+
+function match(candidate, job) {
+  if (!candidate.minSalary || !job.maxSalary) {
+    throw Error("Error");
+  }
+  return (
+    candidate.minSalary - (candidate.minSalary * 10) / 100 <= job.maxSalary
+  );
+}
+
+function isOpposite(s1, s2) {
+  let str = "";
+  for (let i in s1) {
+    if (s1[i].toLowerCase() === s1[i]) {
+      str += s1[i].toUpperCase();
+    } else {
+      str += s1[i].toLowerCase();
+    }
+  }
+  if (!s1 && !s2) return false;
+  return str === s2;
+}
+function removeEveryOther(arr) {
+  return arr.filter((a, index) => index % 2 === 0);
+}
+
+function stringy(size) {
+  let string = "";
+
+  for (let i = 1; i <= size; i++) {
+    if (i % 2 !== 0) {
+      string += 1;
+    } else {
+      string += 0;
+    }
+  }
+  return string;
+}
+function findMultiples(integer, limit) {
+  let arr = [];
+  for (let i = integer; i <= limit; i++) {
+    if (i % integer === 0) {
+      arr.push(i);
+    }
+  }
+  return arr;
+}
+function pipeFix(numbers) {
+  let arr = [];
+  for (let i = numbers[0]; i <= numbers[numbers.length - 1]; i++) {
+    arr.push(i);
+  }
+  return arr;
+}
+/**
+ * Create an application that will display the number of
+ *  kilometers per liter (output) based on the number of 
+ * miles per imperial gallon (input).
+
+Make sure to round off the result to two decimal points.
+
+Some useful associations relevant to this kata:
+
+1 Imperial Gallon = 4.54609188 litres
+1 Mile = 1.609344 kilometres
+ */
+function converter(mpg) {
+  return +(mpg * (1.609344 / 4.54609188)).toFixed(2);
 }
