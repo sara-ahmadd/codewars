@@ -707,3 +707,31 @@ function correct(string) {
   string = string.replace(/[1]/g, "I");
   return string;
 }
+
+/**
+ * Compare your score with your peers'score & return true if you're better
+ * @param {number[]} classPoints
+ * @param {number} yourPoints
+ * @return boolean
+ */
+function betterThanAverage(classPoints, yourPoints) {
+  let average = classPoints.reduce((a, b) => a + b, 0) / classPoints.length;
+  return yourPoints > average ? true : false;
+}
+// console.log(betterThanAverage([1, 2, 3], 2));
+
+function reverseWords(str) {
+  return str.split(" ").reverse().join(" ");
+}
+console.log(reverseWords("hello world!"));
+
+function bmi(weight, height) {
+  let bmi = weight / Math.pow(height, 2);
+  return bmi <= 18.5
+    ? "Underweight"
+    : bmi <= 25.0
+    ? "Normal"
+    : bmi <= 30
+    ? "Overweight"
+    : "Obese";
+}
