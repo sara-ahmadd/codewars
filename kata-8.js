@@ -476,13 +476,13 @@ function loveFunction(flower1, flower2) {
  */
 
 //convert num to string
-function noBoringZeros(number) {
-  let numString = numberToString(number);
-  while (numString.endsWith(0)) {
-    numString = numString.slice(0, numString.length - 1);
-  }
-  return stringToNumber(numString);
-}
+// function noBoringZeros(number) {
+//   let numString = numberToString(number);
+//   while (numString.endsWith(0)) {
+//     numString = numString.slice(0, numString.length - 1);
+//   }
+//   return stringToNumber(numString);
+// }
 // console.log(noBoringZeros(102000));
 function meanOfArray(array) {
   return Math.floor(array.reduce((a, b) => a + b, 0) / array.length);
@@ -893,4 +893,175 @@ Some useful associations relevant to this kata:
  */
 function converter(mpg) {
   return +(mpg * (1.609344 / 4.54609188)).toFixed(2);
+}
+
+/**
+ * Converts binary to decimal number
+ * @param {number} bin
+ * @returns number
+ */
+function binToDec(bin) {
+  return parseInt(bin, 2);
+}
+
+function lowercaseCount(str) {
+  let num = 0;
+  for (let i in str) {
+    if (/[a-z]/g.test(str[i])) {
+      num++;
+    }
+  }
+  return num;
+}
+// console.log(lowercaseCount("abcABC123"));
+
+function drawStairs(n) {
+  let str = "";
+  let result = "";
+  for (let i = 0; i < n; i++) {
+    i === 0 ? (str += "") : (str += " ");
+    i === n - 1 ? (result += `${str}I`) : (result += `${str}I\n`);
+  }
+  return result;
+}
+// console.log(drawStairs(3));
+
+solution = (molarMass1, molarMass2, givenMass1, givenMass2, volume, temp) => {
+  let mass = givenMass1 / molarMass1 + givenMass2 / molarMass2;
+  return (mass * 0.082 * (temp + 273.15)) / volume;
+};
+
+function splitAndMerge(string, separator) {
+  return string
+    .split(" ")
+    .map((x) => x.split("").join(separator))
+    .join(" ");
+}
+// console.log(splitAndMerge("My name is John", "-"));
+
+function sumMul(n, m) {
+  console.log(n, m);
+  if (m <= 0 || n <= 0) return "INVALID";
+  let sum = 0;
+  for (let i = n; i < m; i++) {
+    if (i % n === 0) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+function greet(language) {
+  let langs = {
+    english: "Welcome",
+    czech: "Vitejte",
+    danish: "Velkomst",
+    dutch: "Welkom",
+    estonian: "Tere tulemast",
+    finnish: "Tervetuloa",
+    flemish: "Welgekomen",
+    french: "Bienvenue",
+    german: "Willkommen",
+    irish: "Failte",
+    italian: "Benvenuto",
+    latvian: "Gaidits",
+    lithuanian: "Laukiamas",
+    polish: "Witamy",
+    spanish: "Bienvenido",
+    swedish: "Valkommen",
+    welsh: "Croeso",
+  };
+
+  return Object.keys(langs).includes(language)
+    ? langs[language]
+    : langs["english"];
+}
+// console.log(greet("irish"));
+
+function capitalizeWord(word) {
+  return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
+}
+// console.log(capitalizeWord("world"));
+
+function cookie(x) {
+  return typeof x === "string"
+    ? `Who ate the last cookie? It was Zach!`
+    : x === +x
+    ? `Who ate the last cookie? It was Monica!`
+    : `Who ate the last cookie? It was the dog!`;
+}
+// console.log(cookie(true));
+
+function whoIsPaying(name) {
+  return name.length < 3 ? [`${name}`] : [`${name}`, `${name.slice(0, 2)}`];
+}
+
+function dutyFree(normPrice, discount, hol) {
+  let savingsPerBott = normPrice * (discount / 100);
+  return Math.floor(hol / savingsPerBott);
+}
+function noBoringZeros(n) {
+  let num = String(n);
+  while (num[num.length - 1] === "0") {
+    num = num.slice(0, -1);
+  }
+  return Number(num);
+}
+// console.log(noBoringZeros(102000));
+
+const areaOrPerimeter = function (l, w) {
+  return l === w ? l * w : (l + w) * 2;
+};
+
+function strCount(str, letter) {
+  let count = 0;
+  for (let i in str) {
+    str[i] === letter ? count++ : count;
+  }
+  return count;
+}
+
+function enough(cap, on, wait) {
+  let passCantGo = cap - (on + wait);
+  return passCantGo > 0 ? 0 : Math.abs(passCantGo);
+}
+// console.log(enough(20, 5, 5));
+
+function tripleTrouble(one, two, three) {
+  let i = 0;
+  let str = "";
+  let arr = [];
+  while (i < one.length) {
+    str += one[i];
+    str += two[i];
+    str += three[i];
+    arr.push(str);
+    str = "";
+    i++;
+  }
+  return arr.join("");
+}
+// console.log(tripleTrouble("aaaa", "bbbb", "cccc"));
+
+function position(letter) {
+  let alpha = "abcdefghijklmnopqrstuvwxyz";
+  return `Position of alphabet: ${alpha.indexOf(letter) + 1}`;
+}
+// console.log(position("a"));
+
+function getChar(c) {
+  return String.fromCharCode(c);
+}
+// console.log(getChar(55));
+
+function peopleWithAgeDrink(old) {
+  return old < 14
+    ? "drink toddy"
+    : old < 18
+    ? "drink coke"
+    : old < 21
+    ? "drink beer"
+    : "drink whisky";
+}
+function findAverage(array) {
+  return array.length > 0 ? array.reduce((a, b) => a + b, 0) / array.length : 0;
 }
