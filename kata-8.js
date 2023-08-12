@@ -1109,3 +1109,18 @@ function contamination(text, char) {
   if (text === "" || char === "") return "";
   return text.split("").fill(char).join("");
 }
+
+function pillars(numPill, dist, width) {
+  if (numPill <= 1) return 0;
+  let d = (numPill - 1) * dist * 100 + numPill * width;
+  return d - width * 2;
+}
+function find(array = [], element) {
+  return array.includes(element) ? array.indexOf(element) : "Not found";
+}
+// console.log(find([1, 2, 3], 2));
+
+function validateHello(greetings) {
+  let res = /(hello|ciao|salut|hallo|hola|ahoj|czesc)/gi.test(greetings);
+  return res;
+}
