@@ -1065,3 +1065,47 @@ function peopleWithAgeDrink(old) {
 function findAverage(array) {
   return array.length > 0 ? array.reduce((a, b) => a + b, 0) / array.length : 0;
 }
+function hero(bullets, dragons) {
+  return bullets >= dragons * 2;
+}
+
+function seatsInTheater(nCols, nRows, col, row) {
+  return (nCols - col + 1) * (nRows - row);
+}
+// console.log(seatsInTheater(16, 11, 5, 3));
+
+function findNeedle(haystack) {
+  return (
+    haystack.includes("needle") &&
+    `found the needle at position ${haystack.indexOf("needle")}`
+  );
+}
+
+function mango(quantity, price) {
+  let total = quantity - Math.floor(quantity / 3);
+  return total * price;
+}
+function finalGrade(exam, projects) {
+  if (exam > 90 || projects > 10) {
+    return 100;
+  } else if (exam > 75 && projects >= 5) {
+    return 90;
+  } else if (exam > 50 && projects >= 2) {
+    return 75;
+  } else {
+    return 0;
+  }
+}
+function paperwork(n, m) {
+  return n < 0 || m < 0 ? 0 : m * n;
+}
+function booleanToString(b) {
+  return `${b}`;
+}
+function shortcut(string) {
+  return string.replace(/[aeiou]/g, "");
+}
+function contamination(text, char) {
+  if (text === "" || char === "") return "";
+  return text.split("").fill(char).join("");
+}
