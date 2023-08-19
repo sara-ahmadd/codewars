@@ -1124,3 +1124,36 @@ function validateHello(greetings) {
   let res = /(hello|ciao|salut|hallo|hola|ahoj|czesc)/gi.test(greetings);
   return res;
 }
+const getFactorial = (num) => {
+  if (num <= 1n) return 1n;
+  return num * getFactorial(num - 1n);
+};
+
+function amIWilson(p) {
+  p = BigInt(p);
+  let fac = getFactorial(p - 1n);
+  let wilsonNum = (fac + 1n) / (p * p);
+  // console.log(wilsonNum);
+  return wilsonNum === parseInt(wilsonNum) ? true : false;
+}
+// console.log(amIWilson(563));
+
+function oddCount(n) {
+  let arr = [];
+  for (let i = n - 1; i >= 1; i--) {
+    if (i % 2 == 0) {
+      continue;
+    }
+    arr.push(i);
+  }
+  console.log(arr);
+  return arr.length;
+}
+// console.log(oddCount(7));
+function doubleChar(str) {
+  return str
+    .split("")
+    .map((x) => x.repeat(2))
+    .join("");
+}
+
