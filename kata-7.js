@@ -196,7 +196,7 @@ function eliminateUnsetBits(number) {
   let nums = number.split("").filter((x) => x == 1);
   return parseInt(nums.length > 0 ? nums.join("") : 0, 2);
 }
-console.log(eliminateUnsetBits("000"));
+// console.log(eliminateUnsetBits("000"));
 function getMean(arr, x, y) {
   if (x <= 1 || y <= 1 || y > arr.length) return -1;
   let arr_1 = arr.slice(0, x);
@@ -205,4 +205,101 @@ function getMean(arr, x, y) {
   let mean_2 = arr_2.reduce((a, b) => a + b, 0) / arr_2.length;
   return (mean_1 + mean_2) / 2;
 }
-console.log(getMean([1, 2, 3, 4], 3, 2));
+// console.log(getMean([1, 2, 3, 4], 3, 2));
+
+function solve(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (!arr.includes(-arr[i])) {
+      return arr[i];
+    }
+  }
+}
+// console.log(solve([1, -1, 2, 3, -3, -2, 5]));
+
+function isDivisible(...args) {
+  return args.every((x) => args[0] % x === 0);
+}
+// console.log(isDivisible(12, 3, 4));
+
+var filterString = function (value) {
+  let temp = "";
+
+  for (let i in value) {
+    if (/[0-9]/g.test(value[i])) {
+      temp += value[i];
+    }
+  }
+  return temp;
+};
+// console.log(filterString("a1b2c3"));
+
+function to24hourtime(hour, minute, period) {
+  //check if hr >= 1 && period is pm
+  //so, add that hr to 12
+  hour = hour >= 1 && period == "pm" && hour < 12 ? (hour += 12) : hour;
+  hour = hour < 10 ? `0${hour}` : hour;
+  minute = minute > 10 ? minute : `0${minute}`;
+
+  if (hour == 12 && period == "am") hour = "00";
+  return `${hour}${minute}`;
+}
+// console.log(to24hourtime(12, 3, "pm"));
+
+/**examples =>
+    "07:05:45PM"  -->  "19:05:45"
+    "12:00:01AM"  -->  "00:00:01"
+    "11:46:47PM"  -->  "23:46:47
+ */
+var getMilitaryTime = function (input) {
+  let hr = +input.slice(0, 2);
+  let mn = +input.slice(3, 5);
+  let sec = +input.slice(6, 8);
+  let period = input.slice(8);
+
+  hr = hr >= 1 && period == "PM" && hr < 12 ? (hr += 12) : hr;
+  hr = hr >= 10 ? hr : `0${hr}`;
+  hr = hr == 12 && period == "AM" ? (hr = "00") : hr;
+  mn = mn >= 10 ? mn : `0${mn}`;
+  sec = sec >= 10 ? sec : `0${sec}`;
+  return `${hr}:${mn}:${sec}${period}`;
+};
+
+function whoTookTheCarKey(message) {
+  return message.map((x) => String.fromCharCode(parseInt(x, 2))).join("");
+}
+// console.log(
+//   whoTookTheCarKey([
+//     "01000001",
+//     "01101100",
+//     "01100101",
+//     "01111000",
+//     "01100001",
+//     "01101110",
+//     "01100100",
+//     "01100101",
+//     "01110010",
+//   ])
+// );
+
+function numberOfHooks(length, maxHookDist) {
+  let hookCount = 1;
+  for (let i = length; i > maxHookDist; i /= 2) {
+    hookCount *= 2;
+  }
+  return hookCount + 1;
+}
+function showBits(n) {
+  return (n >>> 0)
+    .toString(2)
+    .padStart(32, 0)
+    .split("")
+    .map((x) => Number(x));
+}
+// console.log(showBits(1));
+
+function maxlen(l1, l2) {
+  let max = l1 > l2 ? l1 : l2;
+  let min = l1 < l2 ? l1 : l2;
+  if (max / 3 == min) return max / 3;
+  return max / 2;
+}
