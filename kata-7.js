@@ -174,13 +174,13 @@ function tailSwap(arr) {
 
 function dayAndTime(n) {
   let days = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
   let day = 24 * 60;
   let time = day + n;
@@ -191,7 +191,7 @@ function dayAndTime(n) {
   hrs = hrs > 10 ? hrs : `0${hrs}`;
   mins = mins > 10 ? mins : `0${mins}`;
 }
-// console.log(dayAndTime(1447));
+// console.log(dayAndTime(759));
 function eliminateUnsetBits(number) {
   let nums = number.split("").filter((x) => x == 1);
   return parseInt(nums.length > 0 ? nums.join("") : 0, 2);
@@ -303,3 +303,24 @@ function maxlen(l1, l2) {
   if (max / 3 == min) return max / 3;
   return max / 2;
 }
+function toIndustrial(time) {
+  if (Number(time)) {
+    let min = time / 60;
+    return Number(min.toFixed(2));
+  }
+  if (typeof time === "string") {
+    let hr = +time.split(":")[0];
+    let min = +time.split(":")[1];
+    min = min / 60;
+    return Number((hr + min).toFixed(2));
+  }
+}
+// console.log(toIndustrial("1:45"));
+
+function toNormal(time) {
+  let hr = +time.toString().split(".")[0];
+  let min = +(time % 1).toFixed(2);
+  min = Math.round(min * 60);
+  return `${hr}:${min < 10 ? `0${min}` : min}`;
+}
+// console.log(toNormal(67.07));
