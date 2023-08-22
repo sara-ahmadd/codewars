@@ -432,3 +432,98 @@ function encode(str) {
     .join("");
   return str;
 }
+
+function parameter(n) {
+  let sum = String(n)
+    .split("")
+    .reduce((a, b) => Number(a) + Number(b), 0);
+  let product = String(n)
+    .split("")
+    .reduce((a, b) => Number(a) * Number(b), 1);
+
+  //LCM(sum, product)
+  //get the GCM for both
+  let gcfSum = [];
+  let gcfProduct = [];
+
+  for (let i = 1; i <= sum; i++) {
+    if (sum % i === 0) {
+      gcfSum.push(i);
+    }
+  }
+  for (let i = 1; i <= product; i++) {
+    if (product % i === 0) {
+      gcfProduct.push(i);
+    }
+  }
+  gcfSum = gcfSum.sort((a, b) => b - a);
+  gcfProduct = gcfProduct.sort((a, b) => b - a);
+  let GCF = gcfSum.find((x) => gcfProduct.includes(x));
+  let LCM = (sum * product) / GCF;
+  return LCM;
+}
+// console.log(parameter(22));
+
+/*
+8,W,T,Y,U,I,O,A,H,X,V and M
+
+''0v0''
+*/
+function owlPic(text) {
+  text = text.match(/(8|W|T|Y|U|I|O|A|H|X|V|M)/gi).join("");
+  return `${text.toUpperCase()}''0v0''${text
+    .split("")
+    .reverse()
+    .join("")
+    .toUpperCase()}`;
+}
+// console.log(owlPic("345trrr"));
+
+function closestPairTonum(n) {
+  let nums = [];
+  for (let i = n - 1; i > 0; i--) {
+    nums.push(i);
+  }
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < nums.length; j++) {
+      if (
+        Math.sqrt(nums[i] + nums[j]) % 1 === 0 &&
+        Math.sqrt(nums[i] - nums[j]) % 1 === 0 &&
+        nums[i] !== nums[j]
+      ) {
+        return [nums[i], nums[j]];
+      }
+    }
+  }
+}
+// console.log(closestPairTonum(10));
+
+function inverseSlice(items, a, b) {
+  items = items.slice(0, a).concat(items.slice(b));
+  return items;
+}
+function processData(data) {
+  return data.map((x) => x.reduce((a, b) => a - b)).reduce((x, y) => x * y, 1);
+}
+// console.log(
+//   processData([
+//     [2, 5],
+//     [3, 4],
+//     [8, 7],
+//   ])
+// );
+
+function checkParity(parity, bin) {
+  let ones = "";
+  for (let i in bin) {
+    if (bin[i] == 1) {
+      ones += 1;
+    }
+  }
+  return ones.length % 2 === 0 && parity == "even"
+    ? 0
+    : ones.length % 2 !== 0 && parity == "odd"
+    ? 0
+    : 1;
+}
+console.log(checkParity("even", "0101010"));
