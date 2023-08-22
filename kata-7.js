@@ -324,3 +324,111 @@ function toNormal(time) {
   return `${hr}:${min < 10 ? `0${min}` : min}`;
 }
 // console.log(toNormal(67.07));
+// Return the nth triangular number
+function triangular(n) {
+  let sum = 0;
+  let resultArr = [];
+  for (let i = 1; i <= n; i++) {
+    sum += i;
+    resultArr.push(sum);
+  }
+  return resultArr[resultArr.length - 1];
+}
+/**
+ * function triangular(n) {
+  if(n <= 0) return 0;
+  return n + triangular(n - 1); 
+}
+ */
+// console.log(triangular(4));
+// A utility function to compute sum
+// of digits in a given number x
+function sumOfDigits(x) {
+  return (x * (x + 1)) / 2;
+}
+// console.log(sumOfDigits(5));
+
+function theVar(theVariables) {
+  let letters = "abcdefghijklmnopqrstuvwxyz";
+  let str = theVariables.split("+");
+  let lettersArr = [];
+  for (let i in str) {
+    let letter = letters.indexOf(str[i]) + 1;
+    lettersArr.push(letter);
+  }
+  return lettersArr.reduce((a, b) => a + b, 0);
+}
+// console.log(theVar("d+g"));
+
+function squaresNeeded(grains) {
+  let grainCount = 1;
+  let squares = 0;
+  for (let i = 1; grainCount <= grains; i++) {
+    grainCount *= 2;
+    squares += 1;
+  }
+  return squares;
+}
+function amicableNumbers(num1, num2) {
+  let numArr = [];
+  for (let i = 1; i <= num1; i++) {
+    if (num1 % i === 0) {
+      numArr.push(i);
+    }
+  }
+  let sum = numArr.reduce((a, b) => a + b, 0);
+  return sum === num2 ? true : false;
+}
+/**<=80: 'kill me now'
+< 100 & > 80: 'i can handle this'
+100 or over: 'party time!!'
+ */
+function boredom(staff) {
+  let departments = {
+    accounts: 1,
+    finance: 2,
+    canteen: 10,
+    regulation: 3,
+    trading: 6,
+    change: 6,
+    IS: 8,
+    retail: 5,
+    cleaning: 4,
+    "pissing about": 25,
+  };
+  let scoreArr = [];
+  for (let i in staff) {
+    let score = departments[staff[i]];
+    scoreArr.push(score);
+  }
+  let total = scoreArr.reduce((a, b) => a + b, 0);
+  return total <= 80
+    ? "kill me now"
+    : total < 100 && total > 80
+    ? "i can handle this"
+    : total >= 100
+    ? "party time!!"
+    : null;
+}
+// console.log(boredom({ tim: "change", jim: "accounts" }));
+
+function vowel2index(str) {
+  let vowels = "aeoiu";
+  str = str
+    .split("")
+    .map((x, ind) => (vowels.includes(x.toLowerCase()) ? ind + 1 : x))
+    .join("");
+  return str;
+}
+// console.log(vowel2index("this"));
+
+function encode(str) {
+  let alpha = "abcdefghijklmnopqrstuvwxyz";
+  str = str
+    .split("")
+    .map((x) =>
+      alpha.includes(x.toLowerCase()) ? alpha.indexOf(x.toLowerCase()) + 1 : x
+    )
+    .join("");
+  return str;
+}
