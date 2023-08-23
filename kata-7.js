@@ -526,4 +526,135 @@ function checkParity(parity, bin) {
     ? 0
     : 1;
 }
-console.log(checkParity("even", "0101010"));
+// console.log(checkParity("even", "0101010"));
+
+/**
+ * - raining or cloudy && chance >= 0.20 ===>> true
+ * - sunny ===> false BUT sunny && chance > 0.2 ===> true
+ */
+function takeUmbrella(weather, chance) {
+  console.log(weather, chance);
+  return weather == "rainy" ||
+    (weather == "cloudy" && chance > 0.2) ||
+    (weather == "sunny" && chance > 0.5)
+    ? true
+    : false;
+}
+/* 
+  - convert feet to inches
+  - divide each of (l, w & h) by 16inch => which is 
+  the edge length of the cubic crate.
+*/
+function boxCapacity(length, width, height) {
+  //feet --(* 12)---> inch
+  let len_inch = (length * 12) / 16,
+    wid_inch = (width * 12) / 16,
+    height_inch = (height * 12) / 16;
+  let box =
+    Math.floor(len_inch) * Math.floor(wid_inch) * Math.floor(height_inch);
+  return box;
+}
+// console.log(boxCapacity(80, 40, 20));
+
+/*
+  b2 − 4ac > 0
+*/
+function quadraticFormula(a, b, c) {
+  let x_1 = -(b / (a * 2)) + Math.sqrt(Math.pow(b / (2 * a), 2) - c / a),
+    x_2 = -(b / (a * 2)) - Math.sqrt(Math.pow(b / (2 * a), 2) - c / a);
+  return [x_1, x_2];
+}
+// console.log(quadraticFormula(2, 16, 1));
+
+/* 
+(x × (21/40) + 7.5) 
+*/
+function celsiusToRomer(temp) {
+  return temp * (21 / 40) + 7.5;
+}
+
+class Quark {
+  constructor(color, flavor) {
+    this.color = color;
+    this.flavor = flavor;
+    this.baryon_number = 1 / 3;
+    this.interact = (q) => {
+      let temp_color = this.color;
+      let temp_flavor = this.flavor;
+
+      this.color = q.color;
+      this.flavor = q.flavor;
+
+      q.color = temp_color;
+      q.flavor = temp_flavor;
+    };
+  }
+}
+
+// let q = new Quark("red", "up");
+// let q_2 = new Quark("blue", "down");
+// q_2.interact(q);
+// console.log(q);
+
+function areaCode(text = "") {
+  return text
+    .match(/\(.*\)/g)
+    .join("")
+    .slice(1, 4);
+}
+// console.log(areaCode("The supplier's phone number is (555) 867-5309"));
+
+class Vector {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.add = (vector) => {
+      return new Vector(this.x + vector.x, this.y + vector.y);
+    };
+  }
+}
+
+// let vec_1 = new Vector(1, 2);
+// let vec_2 = new Vector(3, 4);
+
+// let vec_c = vec_1.add(vec_2);
+// console.log(vec_c);
+
+function formatPoem(poem) {
+  return poem.split(/\.\s/g).join(".\n");
+}
+// console.log(
+//   formatPoem(
+//     "Beautiful is better than ugly. Explicit is better than implicit. Simple is better than complex. Complex is better than complicated."
+//   )
+// );
+
+function quotable(name, quote) {
+  return `${name} said: \"${quote}\"`;
+}
+function testit(n) {
+  let ones = "";
+  n = n.toString(2);
+  for (let i in n) {
+    if (n[i] == 1) {
+      ones += n[i];
+    }
+  }
+  return ones.length;
+}
+// console.log(testit(3));
+
+function testWord(s) {
+  let count = 0;
+  s = s.split(" ");
+  for (let i in s) {
+    if (s[i].toLowerCase().startsWith("w")) {
+      s[i] = s[i].split("");
+      if ("aeoui".includes(s[i][1])) {
+        count++;
+      }
+    }
+  }
+  return count;
+}
+console.log(testWord("hello World"));
