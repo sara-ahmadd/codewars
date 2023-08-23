@@ -632,7 +632,7 @@ function formatPoem(poem) {
 function quotable(name, quote) {
   return `${name} said: \"${quote}\"`;
 }
-function testit(n) {
+function testit_1(n) {
   let ones = "";
   n = n.toString(2);
   for (let i in n) {
@@ -644,17 +644,73 @@ function testit(n) {
 }
 // console.log(testit(3));
 
-function testWord(s) {
-  let count = 0;
-  s = s.split(" ");
-  for (let i in s) {
-    if (s[i].toLowerCase().startsWith("w")) {
-      s[i] = s[i].split("");
-      if ("aeoui".includes(s[i][1])) {
-        count++;
-      }
-    }
-  }
-  return count;
+function testit(s) {
+  return s.match(/w.*?o.*?r.*?d.*?/gi || []).length;
 }
-console.log(testWord("hello World"));
+// console.log(testit("hello world"));
+function breakChocolate(n, m) {
+  if (m <= 1 || n <= 1) return 0;
+}
+//In summary, this function replaces every two consecutive
+//characters in the input string with a single character,
+//where the replacement character is calculated
+//as the average of their Unicode values.
+function testit_3(s) {
+  return s.replace(/../g, (s) =>
+    String.fromCharCode((s.charCodeAt(0) + s.charCodeAt(1)) / 2)
+  );
+}
+function squareDigits(num) {
+  return +String(num)
+    .split("")
+    .map((x) => Math.pow(Number(x), 2))
+    .join("");
+}
+
+function descendingOrder(n) {
+  return +String(n)
+    .split("")
+    .sort((a, b) => b - a)
+    .join("");
+}
+function getMiddle(str) {
+  let len = Math.floor(str.length / 2);
+  if (str.length % 2 === 0) {
+    return `${str[len - 1]}${str[len]}`;
+  }
+  if (str.length % 2 !== 0) {
+    return str[len];
+  }
+}
+// console.log(getMiddle("testy"));
+
+function accum(s) {
+  let arr = s.split("");
+  let newArr = arr.map((x, ind) => {
+    return x.toLowerCase().repeat(ind + 1);
+  });
+  return newArr.map((x) => `${x[0].toUpperCase()}${x.slice(1)}`);
+}
+// console.log(accum("ZpglnRxqenU"));
+var isSquare = function (n) {
+  return Math.sqrt(n) % 1 === 0;
+};
+function filter_list(l) {
+  return l.filter((x) => typeof x === "number");
+}
+
+function isIsogram(str) {
+  // let counts = {};
+  // let arr = str.split("");
+  // arr.forEach((x) => {
+  //   counts[x] = (counts[x] || 0) + 1;
+  // });
+  // return counts;
+
+  // let arr = str.split("");
+  // let unique = [...new Set(arr)];
+  // return unique.map((x) => [x, arr.filter((y) => y === x).length]);
+  return new Set(str.toLowerCase().split("")).size === str.length;
+}
+
+console.log(isIsogram("abc"));
