@@ -713,4 +713,38 @@ function isIsogram(str) {
   return new Set(str.toLowerCase().split("")).size === str.length;
 }
 
-console.log(isIsogram("abc"));
+// console.log(isIsogram("abc"));
+
+function testit_4(s) {
+  return s
+    .split(" ")
+    .map((x) => {
+      if (x.length >= 2) {
+        let last_letter = x[x.length - 1];
+        x = x.slice(0, x.length - 1);
+        return `${x}${last_letter.toUpperCase()}`;
+      } else if (x.length === 1) {
+        return x.toUpperCase();
+      }
+    })
+    .join(" ");
+}
+// console.log(testit_4("ab ab"));
+
+function testit_5(act, s) {
+  let str = "";
+  for (let i = 0; i < act.length; i++) {
+    if (s[i] === "_" && act[i] === "run") {
+      str += "_";
+    } else if (s[i] === "_" && act[i] !== "run") {
+      str += "x";
+    }
+    if (s[i] === "|" && act[i] === "jump") {
+      str += "|";
+    } else if (s[i] === "|" && act[i] !== "jump") {
+      str += "/";
+    }
+  }
+  return str;
+}
+console.log(testit_5(["run", "run", "run", "run", "run"], "_|_|_"));
