@@ -747,4 +747,181 @@ function testit_5(act, s) {
   }
   return str;
 }
-console.log(testit_5(["run", "run", "run", "run", "run"], "_|_|_"));
+// console.log(testit_5(["run", "run", "run", "run", "run"], "_|_|_"));
+
+function tidyNumber(n) {
+  let arr = String(n).split("");
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > arr[i + 1]) return false;
+  }
+  return true;
+}
+// console.log(tidyNumber(69));
+function testit_6(a, b) {
+  a = [...new Set(a)];
+  b = [...new Set(b)];
+  let similar = a.concat(b);
+  return similar.sort((a, b) => a - b);
+}
+// console.log(testit_6([6, 4], [6]));
+
+function validParentheses(parenStr) {
+  //iterat over the string
+  //creat an empty array
+  if (parenStr.length == 0) return true;
+  // let arr = [];
+  // for (let i = 0; i < parenStr.length; i++) {
+  //   let lastOpen = arr[arr.length - 1];
+  //   if (parenStr[i] === "(") {
+  //     arr.push(parenStr[i]);
+  //   } else if (lastOpen === "(" && parenStr[i] === ")") {
+  //     arr.pop();
+  //   } else {
+  //     return false;
+  //   }
+  // }
+  // return arr.length ? false : true;
+  let count = 0;
+
+  for (let i = 0; i < parenStr.length; i++) {
+    let char = parenStr[i];
+    if (char === "(") {
+      count++;
+    } else {
+      count--;
+    }
+  }
+  return count === 0;
+}
+// console.log(validParentheses("()))()"));
+
+function asciiEncrypt(plaintext) {
+  return plaintext
+    .split("")
+    .map((x, ind) => plaintext.charCodeAt(ind) + ind)
+    .map((x) => String.fromCharCode(x))
+    .join("");
+}
+
+function asciiDecrypt(ciphertext) {
+  return ciphertext
+    .split("")
+    .map((x, ind) => ciphertext.charCodeAt(ind) - ind)
+    .map((x) => String.fromCharCode(x))
+    .join("");
+}
+
+// console.log(asciiEncrypt("password"));
+
+// console.log(asciiDecrypt("pbuv{txk"));
+
+function toBinary(n) {
+  return n > 0 ? n.toString(2) : (n >>> 0).toString(2);
+}
+function maxDiff(list) {
+  if (list.length <= 1) return 0;
+  list = list.sort((a, b) => b - a);
+  return list[0] - list[list.length - 1];
+}
+
+// console.log(maxDiff([1, 4, 2, 7, 4]));
+// let dict = {
+//   d: "disturbing",
+//   g: "gregarious",
+//   m: "mustache",
+//   l: "literal",
+//   k: "klingon",
+//   j: "joke",
+//   i: "ingestable",
+//   n: "newtonian",
+//   t: "turn",
+//   e: "eager",
+// };,
+let dict = {
+  D: "disturbing",
+  G: "gregarious",
+  M: "mustache",
+  L: "literal",
+  K: "klingon",
+  J: "joke",
+  I: "ingestable",
+  N: "newtonian",
+  E: "eager",
+  R: "rant",
+  E: "eager",
+  S: "stylish",
+  T: "turn",
+  C: "confident",
+  O: "oscillating",
+  W: "weird",
+  A: "awesome",
+  H: "hippy",
+};
+function makeBackronym(string) {
+  let str = string.split("");
+  let result = [];
+  for (let i in str) {
+    let s = str[i];
+    result.push(dict[s.toUpperCase()]);
+  }
+  return result.join(" ");
+}
+// console.log(makeBackronym("adh"));
+
+function maskify(cc) {
+  if (cc.length <= 1) return cc;
+  let s = cc.slice(-4);
+  cc = cc.slice(0, -4);
+  let rest = cc.split("").fill("#");
+
+  return `${rest.join("")}${s}`;
+}
+function racePodium(blocks) {
+  let fir = Math.ceil(blocks / 3) + 1;
+  let sec = fir - 1;
+  let thir = blocks - (fir + sec);
+
+  if (thir === 0) {
+    thir = 1;
+    sec -= 1;
+  }
+  return [sec, fir, thir];
+}
+// console.log(racePodium(100000));
+
+function calculate(n1, n2, o) {
+  let operations = ["+", "-", "*"];
+  let num_1 = parseInt(n1, 2);
+  let num_2 = parseInt(n2, 2);
+
+  if (o === "add") {
+    o = operations[0];
+  } else if (o === "subtract") {
+    o = operations[1];
+  } else {
+    o = operations[2];
+  }
+  return eval(num_1 + o + num_2).toString(2);
+}
+// console.log(calculate("1", "1", "add"));
+
+function squareAreaToCircle(size) {
+  return Math.pow(Math.sqrt(size) / 2, 2) * Math.PI;
+}
+
+function replaceNth(text, n, oldValue, newValue) {
+  let arr = text.split(" ");
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].includes(oldValue)) {
+      count += 1;
+      arr[i] = `${count}${arr[i]}`;
+      if (parseInt(arr[i]) % n === 0) {
+        arr[i] = arr[i].replace(oldValue, newValue);
+      }
+      arr[i] = arr[i].replace(/^[0-9]/g, "");
+    }
+  }
+  return arr.join(" ");
+}
+console.log(replaceNth("Vader said: No, I am your father!", 2, "a", "o"));
