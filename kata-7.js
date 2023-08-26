@@ -966,23 +966,67 @@ var capitals = function (word) {
 
 function convert(degrees) {
   let degree = parseInt(degrees);
-
   let minuites = degrees.toString().split(".")[1] || 0;
   minuites = Number(`0.${minuites}`) * 60;
+
+  let seconds = Math.round((minuites % 1) * 60);
+
   minuites = parseInt(minuites);
-
-  let seconds = (minuites % 1) * 60;
-  seconds = Math.round(seconds);
-
-  if (minuites === 60) {
-    degree += 1;
-    minuites = 0;
-  }
   if (seconds === 60) {
     minuites += 1;
     seconds = 0;
   }
+  if (minuites === 60) {
+    degree += 1;
+    minuites = 0;
+  }
+
   let result = [degree, minuites, seconds];
+
+  if (result.every((x) => x === 0)) {
+    return [0];
+  } else if (result[1] === 0 && result[2] === 0) {
+    return [result[0]];
+  } else if (result[2] === 0) {
+    return [result[0], result[1]];
+  }
   return result;
 }
-console.log(convert(40.0567));
+
+// console.log(convert(0.999999));
+
+function bingo(a) {
+  let alpha = ".abcdefghijklmnopqrstuvwxyz";
+  a = a.map((x) => alpha[x]);
+  let text = "bingo";
+  let res = a.filter((x) => text.includes(x));
+  res = [...new Set(res)];
+  console.log(res);
+  return res.length >= 4 ? "WIN" : "LOSE";
+}
+// console.log(bingo([21, 13, 2, 7, 5, 14, 7, 15, 9, 10]));
+
+function solution(nums) {
+  return !nums ? [] : nums.sort((a, b) => a - b);
+}
+function removeUrlAnchor(url) {
+  return url.split("#")[0];
+}
+
+function printerError(s) {
+  let len = s.length;
+  let notMatch = s.match(/[^a-m]/gi)?.length || 0;
+  return `${notMatch}/${len}`;
+}
+// console.log(printerError("aaaxbbbbyyhwawiwjjjwwm"));
+
+/* 
+new Date(2016, 2, 8, 16, 42, 59)
+//Should return: 
+"16:42:59,000"
+*/
+function convert(time) {
+  let newDate = time.toJSON().slice(11, -1);
+  return newDate.replace(".", ",");
+}
+// console.log(convert(new Date(2016, 2, 8, 16, 42, 59)));
