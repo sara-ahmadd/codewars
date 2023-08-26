@@ -910,18 +910,79 @@ function squareAreaToCircle(size) {
 }
 
 function replaceNth(text, n, oldValue, newValue) {
-  let arr = text.split(" ");
-  let count = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].includes(oldValue)) {
-      count += 1;
-      arr[i] = `${count}${arr[i]}`;
-      if (parseInt(arr[i]) % n === 0) {
-        arr[i] = arr[i].replace(oldValue, newValue);
-      }
-      arr[i] = arr[i].replace(/^[0-9]/g, "");
+  let count = 1;
+  return n > 0
+    ? text.replace(new RegExp(oldValue, "g"), (char) =>
+        count++ % n === 0 ? newValue : char
+      )
+    : text;
+}
+// console.log(
+//   replaceNth(
+//     "Vader no said: Noooooooo, I am your father noooooooo!",
+//     4,
+//     "o",
+//     "i"
+//   )
+// );
+
+function cookPancakes(n, m) {
+  let time = Math.ceil(n * 2) * m;
+  return time === 1 ? 2 : time;
+}
+// console.log(cookPancakes(1, 2));
+
+function reverseNumber(n, b) {
+  if (b === 1n) return n;
+  let result = 0n;
+  while (n > 0n) {
+    result = result * b + (n % b);
+    n /= b;
+  }
+  return result;
+}
+// console.log(reverseNumber(12n, 2n));
+
+function maxMultiple(divisor, bound) {
+  let result = [];
+  for (let i = 1; i <= bound; i++) {
+    if (i % divisor === 0) {
+      result.push(i);
     }
   }
-  return arr.join(" ");
+  return result[result.length - 1];
 }
-console.log(replaceNth("Vader said: No, I am your father!", 2, "a", "o"));
+// console.log(maxMultiple(2, 7));
+
+var capitals = function (word) {
+  let arr = [];
+  for (let i in word) {
+    if (word[i].toUpperCase() === word[i]) {
+      arr.push(+i);
+    }
+  }
+  return arr;
+};
+
+function convert(degrees) {
+  let degree = parseInt(degrees);
+
+  let minuites = degrees.toString().split(".")[1] || 0;
+  minuites = Number(`0.${minuites}`) * 60;
+  minuites = parseInt(minuites);
+
+  let seconds = (minuites % 1) * 60;
+  seconds = Math.round(seconds);
+
+  if (minuites === 60) {
+    degree += 1;
+    minuites = 0;
+  }
+  if (seconds === 60) {
+    minuites += 1;
+    seconds = 0;
+  }
+  let result = [degree, minuites, seconds];
+  return result;
+}
+console.log(convert(40.0567));
