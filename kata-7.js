@@ -1030,3 +1030,90 @@ function convert(time) {
   return newDate.replace(".", ",");
 }
 // console.log(convert(new Date(2016, 2, 8, 16, 42, 59)));
+
+function sortIt(arr) {
+  let repeats = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    repeats[arr[i]] = (repeats[arr[i]] || 0) + 1;
+  }
+  return arr.slice().sort((a, b) => repeats[a] - repeats[b] || b - a);
+}
+// console.log(sortIt([1, 1, 1, 2, 2, 3, 3, 3]));
+
+const xMarksTheSpot = (input) => {
+  let numOfX = input.flat().filter((x) => x === "x").length;
+  if (!input || numOfX > 1 || numOfX === 0) {
+    return [];
+  }
+
+  for (let i = 0; i < input.length; i++) {
+    for (let j = 0; j < input[i].length; j++) {
+      if (input[i][j] === "x") {
+        return [i, j];
+      }
+    }
+  }
+};
+// console.log(
+//   xMarksTheSpot([
+//     ["x", "o"],
+//     ["o", "o"],
+//   ])
+// );
+
+function convert(number) {
+  let numbers = number.match(/(\d{2})/g);
+  console.log(numbers);
+  return numbers.map((x) => String.fromCharCode(Number(x))).join("");
+}
+// console.log(convert("73327673756932858080698267658369"));
+
+let leetDialect = {
+  A: "@",
+  B: "8",
+  C: "(",
+  D: "D",
+  E: "3",
+  F: "F",
+  G: "6",
+  H: "#",
+  I: "!",
+  J: "J",
+  K: "K",
+  L: "1",
+  M: "M",
+  N: "N",
+  O: "0",
+  P: "P",
+  Q: "Q",
+  R: "R",
+  S: "$",
+  T: "7",
+  U: "U",
+  V: "V",
+  W: "W",
+  X: "X",
+  Y: "Y",
+  Z: "2",
+};
+function toLeetSpeak(str) {
+  return str.replace(/./gi, (char) => leetDialect[char] || char);
+}
+// console.log(toLeetSpeak("LEET"));
+
+function solution(number) {
+  let a = [],
+    b = [],
+    c = [];
+  for (let i = 1; i < number; i++) {
+    if (i % 3 === 0 && i % 5 !== 0) {
+      a.push(i);
+    } else if (i % 3 !== 0 && i % 5 === 0) {
+      b.push(i);
+    } else if (i % 3 === 0 && i % 5 === 0) {
+      c.push(i);
+    }
+  }
+  return [a.length, b.length, c.length];
+}
