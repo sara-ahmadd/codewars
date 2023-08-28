@@ -1103,17 +1103,53 @@ function toLeetSpeak(str) {
 // console.log(toLeetSpeak("LEET"));
 
 function solution(number) {
-  let a = [],
-    b = [],
-    c = [];
+  let a = 0,
+    b = 0,
+    c = 0;
   for (let i = 1; i < number; i++) {
     if (i % 3 === 0 && i % 5 !== 0) {
-      a.push(i);
+      a++;
     } else if (i % 3 !== 0 && i % 5 === 0) {
-      b.push(i);
+      b++;
     } else if (i % 3 === 0 && i % 5 === 0) {
-      c.push(i);
+      c++;
     }
   }
-  return [a.length, b.length, c.length];
+  return [a, b, c];
 }
+// console.log(solution(20));
+function color2grey(image) {}
+console.log(
+  color2grey([
+    [
+      [123, 231, 12],
+      [56, 43, 124],
+    ],
+    [
+      [78, 152, 76],
+      [64, 132, 200],
+    ],
+  ])
+);
+function getMinMax(arr) {
+  return [
+    arr.reduce((a, b) => (a < b ? a : b)),
+    arr.reduce((a, b) => (a > b ? a : b)),
+  ];
+}
+function explode(s) {
+  return s.replace(/./g, (n) => n.repeat(n));
+}
+const sxore = function (n) {
+  switch (n % 4) {
+    case 0:
+      return n;
+    case 1:
+      return 1;
+    case 2:
+      return n + 1;
+    default:
+      return 0;
+  }
+};
+console.log(sxore(50));
