@@ -1118,19 +1118,33 @@ function solution(number) {
   return [a, b, c];
 }
 // console.log(solution(20));
-function color2grey(image) {}
-console.log(
-  color2grey([
-    [
-      [123, 231, 12],
-      [56, 43, 124],
-    ],
-    [
-      [78, 152, 76],
-      [64, 132, 200],
-    ],
-  ])
-);
+function color2grey(image) {
+  let level = 0;
+  let sum = 0;
+  let result = [];
+  for (let i of image) {
+    if (i instanceof Array) {
+      continue;
+    } else {
+      sum += i;
+    }
+    console.log(sum / 3);
+    result.push([sum / 3, sum / 3, sum / 3]);
+  }
+  return result;
+}
+// console.log(
+//   color2grey([
+//     [
+//       [123, 231, 12],
+//       [56, 43, 124],
+//     ],
+//     [
+//       [78, 152, 76],
+//       [64, 132, 200],
+//     ],
+//   ])
+// );
 function getMinMax(arr) {
   return [
     arr.reduce((a, b) => (a < b ? a : b)),
@@ -1140,16 +1154,49 @@ function getMinMax(arr) {
 function explode(s) {
   return s.replace(/./g, (n) => n.repeat(n));
 }
+// const sxore = function (n) {
+// switch (n % 4) {
+//   case 0:
+//     return n;
+//   case 1:
+//     return 1;
+//   case 2:
+//     return n + 1;
+//   default:
+//     return 0;
+// }
+/*
+  const sxore = function(n){
+  let x = +n.toString(2).slice(-2)
+  return x===10?n+1:
+         x===11?0:
+         x===01?1:n
+}
+  */
+// };
 const sxore = function (n) {
-  switch (n % 4) {
-    case 0:
-      return n;
-    case 1:
-      return 1;
-    case 2:
-      return n + 1;
-    default:
-      return 0;
-  }
+  let num = n.toString(2).slice(-2);
+  return num === "10" ? n + 1 : num === "11" ? 0 : num === "01" ? 1 : n;
 };
 console.log(sxore(50));
+
+function tiyFizzBuzz(sentence) {
+  return sentence.replace(/[a-zA-Z]/g, (char) =>
+    char == char.toUpperCase() && "AEIOU".includes(char)
+      ? "Iron Yard"
+      : char == char.toUpperCase() && !"aeiou".includes(char)
+      ? "Iron"
+      : char == char.toLowerCase() && "aeiou".includes(char)
+      ? "Yard"
+      : char
+  );
+}
+// console.log(tiyFizzBuzz("Hello WORLD!"));
+
+function score(n) {
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  let res = n.toString(2).replace(/0/g, 1);
+  return parseInt(res, 2);
+}
+console.log(score(1000000));
