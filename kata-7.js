@@ -1178,7 +1178,7 @@ const sxore = function (n) {
   let num = n.toString(2).slice(-2);
   return num === "10" ? n + 1 : num === "11" ? 0 : num === "01" ? 1 : n;
 };
-console.log(sxore(50));
+// console.log(sxore(50));
 
 function tiyFizzBuzz(sentence) {
   return sentence.replace(/[a-zA-Z]/g, (char) =>
@@ -1199,4 +1199,33 @@ function score(n) {
   let res = n.toString(2).replace(/0/g, 1);
   return parseInt(res, 2);
 }
-console.log(score(1000000));
+// console.log(score(1000000));
+
+function solution_text(fullText, searchText) {
+  return fullText.match(new RegExp(searchText, "gi"))?.length || 0;
+}
+// console.log(solution_text("aaabbbcccc", "bb"));
+
+function pendulum(values) {
+  let min = values.reduce((a, b) => (a > b ? b : a));
+  let res = [];
+  values.sort((a, b) => a - b);
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] > min && i % 2 !== 0) {
+      res.push(values[i]);
+    } else {
+      res.unshift(values[i]);
+    }
+  }
+  return res;
+}
+// console.log(pendulum([4, 6, 7, 9, 2]));
+
+function keepOrder(ary, val) {
+  let arr = ary.slice();
+  arr.push(val);
+  let newArr = arr.sort((a, b) => a - b);
+  return newArr.indexOf(val);
+}
+// console.log(keepOrder([1, 2, 3, 4, 7], 0));
+// console.log(keepOrder([1, 1, 2, 2, 2], 2));
