@@ -1229,3 +1229,16 @@ function keepOrder(ary, val) {
 }
 // console.log(keepOrder([1, 2, 3, 4, 7], 0));
 // console.log(keepOrder([1, 1, 2, 2, 2], 2));
+
+function stringsConstruction(A, B) {
+  let txt = "";
+  for (let i = 0; i < B.length; i++) {
+    if (B.includes(A[i])) {
+      txt += B[i];
+    } else {
+      continue;
+    }
+  }
+  console.log(txt);
+}
+console.log(stringsConstruction("abc", "abccba"));
