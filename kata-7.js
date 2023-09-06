@@ -1353,9 +1353,48 @@ function isLeapYear(duration, year) {
 }
 // console.log(isLeapYear(124.125, 102));
 function realNumbers(n) {
-  let arr = Array.from("0", (_, i) => i + 1);
-  let filteredArr = arr.filter(
-    (x) => x % 2 !== 0 && x % 3 !== 0 && x % 5 !== 0
+  // n(a^b^c) = n - n(a) - n(b) - n(c) + n(a^b) + n(b^c) + n(a^c) - n(a^b^c)
+  let { floor } = Math;
+  return (
+    n -
+    floor(n / 2) -
+    floor(n / 3) -
+    floor(n / 5) +
+    floor(n / 6) +
+    floor(n / 15) +
+    floor(n / 10) -
+    floor(n / 30)
   );
-  return filteredArr.length;
+}
+// console.log(realNumbers(99751));
+
+function initials(n) {
+  let str = n.split(" ");
+  let res = [];
+  for (let i = 0; i < str.length - 1; i++) {
+    res.push(str[i].slice(0, 1).toUpperCase());
+  }
+  let lastItem = str[str.length - 1];
+  res.push(lastItem.replace(lastItem[0], lastItem[0].toUpperCase()));
+  return res.join(".");
+}
+
+function squareIt(int) {
+  let res = Math.sqrt(String(int).length);
+  let ans = [];
+  if (res % 1 === 0) {
+    for (let i = 0; i < String(int).length; i += res) {
+      let s = String(int).slice(i, i + res);
+      ans.push(s);
+    }
+    return ans.join("\n");
+  } else {
+    return "Not a perfect square!";
+  }
+}
+// console.log(squareIt(123123123));
+
+
+function rangeBitCount(a, b) {
+  //coding and coding..
 }
