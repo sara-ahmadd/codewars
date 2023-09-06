@@ -1231,14 +1231,131 @@ function keepOrder(ary, val) {
 // console.log(keepOrder([1, 1, 2, 2, 2], 2));
 
 function stringsConstruction(A, B) {
-  let txt = "";
+  let count_a = {};
+  for (let i = 0; i < A.length; i++) {
+    count_a[A[i]] = (count_a[A[i]] || 0) + 1;
+  }
+
+  let count_b = {};
   for (let i = 0; i < B.length; i++) {
-    if (B.includes(A[i])) {
-      txt += B[i];
+    count_b[B[i]] = (count_b[B[i]] || 0) + 1;
+  }
+
+  let count = Number.MAX_VALUE;
+
+  for (let i = 0; i < A.length; i++) {
+    if (count_a[A[i]] !== 0) {
+      count = Math.min(count, count_b[B[i]] / count_a[A[i]]);
+    }
+  }
+  console.log(count_a, count_b);
+  return count;
+}
+// console.log(stringsConstruction("abc", "cbacab"));
+
+function toBytes(n) {
+  let bin = n.toString(2);
+  console.log(bin);
+  console.log(bin.length);
+  let bin_len = Math.ceil(bin.length / 8);
+  bin = bin.padStart(bin_len * 8, "0");
+  let res = [];
+  for (let i = 0; i < bin.length; i += 8) {
+    res.push(bin.slice(i, i + 8));
+  }
+  return res;
+}
+// console.log(toBytes(257));
+
+function reverseMessage(str) {
+  let newStr = str.split("").reverse().join("");
+  let result = newStr
+    .split(" ")
+    .map((y) => y.toLowerCase())
+    .map((x) => x.replace(x[0], x[0]?.toUpperCase()))
+    .join(" ");
+  return result;
+}
+// console.log(reverseMessage("hello world!"));
+
+const elementLocation = (begin, end, index, size) => {
+  let element = size * index;
+  let location = begin + element;
+  if (location >= end || location < begin) {
+    throw Error("error");
+  }
+  return location;
+};
+
+// console.log(elementLocation(0x1000, 0x1040, 0x8, 0x8));
+
+function friend(friends) {
+  return friends.filter((x) => x.length === 4);
+}
+
+function swapAdjacentBits(n) {
+  let bin = n.toString(2).padStart(32, "0").split("");
+  console.log(bin);
+  for (let i = 0; i < bin.length - 1; i += 2) {
+    let temp = bin[i];
+    bin[i] = bin[i + 1];
+    bin[i + 1] = temp;
+  }
+  console.log(bin);
+  bin = bin.join("");
+  return parseInt(bin, 2);
+}
+// console.log(swapAdjacentBits(74));
+
+/* 
+10, 20, 50, 100, 200 and 500*/
+
+function solve(n) {
+  let dollars = [500, 200, 100, 50, 20, 10];
+  let i = 0;
+  let count = 0;
+
+  while (dollars[i]) {
+    if (n >= dollars[i]) {
+      n -= dollars[i];
+      console.log(n);
+      count++;
     } else {
+      i++;
       continue;
     }
   }
-  console.log(txt);
+  if (n > 0) {
+    return -1;
+  }
+  return count;
 }
-console.log(stringsConstruction("abc", "abccba"));
+// console.log(solve(1250));
+
+function spacey(array) {
+  let result = [];
+  let items = "";
+  for (let i = 0; i < array.length; i++) {
+    items += array[i];
+    result.push(items);
+  }
+  return result;
+}
+
+// console.log(spacey(["i", "have", "no", "space"]));
+
+var removeVowels = function (str) {
+  return str.replace(/[a|e|i|o|u]/gi, "");
+};
+function isLeapYear(duration, year) {
+  let reminder = duration % 1;
+  return year % (1 / reminder) === 0;
+}
+// console.log(isLeapYear(124.125, 102));
+function realNumbers(n) {
+  let arr = Array.from("0", (_, i) => i + 1);
+  let filteredArr = arr.filter(
+    (x) => x % 2 !== 0 && x % 3 !== 0 && x % 5 !== 0
+  );
+  return filteredArr.length;
+}
