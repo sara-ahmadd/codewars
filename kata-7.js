@@ -1394,7 +1394,42 @@ function squareIt(int) {
 }
 // console.log(squareIt(123123123));
 
-
 function rangeBitCount(a, b) {
-  //coding and coding..
+  let res = [];
+  for (let i = a; i <= b; i++) {
+    res.push(i);
+  }
+  res = res
+    .map((x) => x.toString(2))
+    .map((y) => y.replace(/0{1,}/g, ""))
+    .map((x) => x.length);
+  return res.reduce((a, b) => a + b);
 }
+// console.log(rangeBitCount(2, 7));
+
+function powerOf4(n) {
+  if (typeof n !== "number") {
+    return false;
+  }
+
+  for (let i = 0; i <= 100; i++) {
+    if (Math.pow(4, i) === n) {
+      return true;
+    }
+  }
+  return false;
+}
+//const powerOf4 = (n) => typeof n === 'number' && Number.isInteger(Math.log(n) / Math.log(4));
+
+function center(strng, width, fill = " ") {
+  if (strng.length > width) return strng;
+
+  let res = [strng];
+
+  for (let i = 0; i < (width - strng.length)/2; i++) {
+    res.unshift(fill);
+    res.push(fill);
+  }
+  return res.join("");
+}
+console.log(center("abc", 4, "/"));
