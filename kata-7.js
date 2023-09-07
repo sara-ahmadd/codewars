@@ -1118,33 +1118,7 @@ function solution(number) {
   return [a, b, c];
 }
 // console.log(solution(20));
-function color2grey(image) {
-  let level = 0;
-  let sum = 0;
-  let result = [];
-  for (let i of image) {
-    if (i instanceof Array) {
-      continue;
-    } else {
-      sum += i;
-    }
-    console.log(sum / 3);
-    result.push([sum / 3, sum / 3, sum / 3]);
-  }
-  return result;
-}
-// console.log(
-//   color2grey([
-//     [
-//       [123, 231, 12],
-//       [56, 43, 124],
-//     ],
-//     [
-//       [78, 152, 76],
-//       [64, 132, 200],
-//     ],
-//   ])
-// );
+
 function getMinMax(arr) {
   return [
     arr.reduce((a, b) => (a < b ? a : b)),
@@ -1452,3 +1426,73 @@ var circleArea = function (radius) {
   if (typeof radius !== "number" || radius <= 0) return false;
   return +(Math.PI * radius * radius).toFixed(2);
 };
+function wordPattern(word) {
+  let letters = {};
+  word = word.split("").map((x) => x.toLowerCase());
+  let newWord = [...new Set(word)];
+  for (let i in newWord) {
+    letters[newWord[i]] = letters[newWord[i]] || i;
+  }
+  word = word.join("").replace(/\w/gi, (char) => `${letters[char]}.`);
+  word = word.slice(0, word.length - 1);
+  return word;
+}
+// console.log(
+//   wordPattern("HilzPllrOkqQZTCFvxvGhhyvydqWtocHfMPzovBPOvFcyQarBZppopoth")
+// );
+
+function clockDegree(s) {
+  let hrs = +s.split(":")[0];
+  let mns = +s.split(":")[1];
+  if (isNaN(hrs) || isNaN(mns) || hrs >= 24 || mns > 59 || hrs < 0 || mns < 0) {
+    return "Check your time !";
+  }
+  let resHrs = 0;
+  let resMns = 0;
+  for (let i = 1; i <= hrs; i++) {
+    if (i === 12) {
+      resHrs = 0;
+      continue;
+    }
+    resHrs += 30;
+  }
+  for (let i = 1; i <= mns; i++) {
+    resMns += 6;
+  }
+  if (hrs == 0 || hrs == 12) {
+    resHrs = 360;
+  }
+  if (mns == 0) {
+    resMns = 360;
+  }
+  return `${resHrs}:${resMns}`;
+}
+// console.log(clockDegree("-01:00"));
+
+function color2grey(image) {
+  let level = 0;
+  let sum = 0;
+  let result = [];
+  for (let i of image) {
+    if (i instanceof Array) {
+      continue;
+    } else {
+      sum += i;
+    }
+    console.log(sum / 3);
+    result.push([sum / 3, sum / 3, sum / 3]);
+  }
+  return result;
+}
+// console.log(
+//   color2grey([
+//     [
+//       [123, 231, 12],
+//       [56, 43, 124],
+//     ],
+//     [
+//       [78, 152, 76],
+//       [64, 132, 200],
+//     ],
+//   ])
+// );
