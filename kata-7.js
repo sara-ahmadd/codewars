@@ -1421,15 +1421,34 @@ function powerOf4(n) {
 }
 //const powerOf4 = (n) => typeof n === 'number' && Number.isInteger(Math.log(n) / Math.log(4));
 
+/* 
+function center(strng, width, fill = ' ') {
+if (strng.length > width) return strng;
+const fillRepeatCount = width - strng.length;
+const lefthand = Math.ceil(fillRepeatCount / 2);
+const righthand = Math.floor(fillRepeatCount / 2);
+return `${fill.repeat(lefthand)}${strng}${fill.repeat(righthand)}`;
+}
+*/
 function center(strng, width, fill = " ") {
   if (strng.length > width) return strng;
-
   let res = [strng];
-
-  for (let i = 0; i < (width - strng.length)/2; i++) {
-    res.unshift(fill);
-    res.push(fill);
+  let len = width - strng.length;
+  for (let i = 0; i < width; i += 1) {
+    if (len > 0) {
+      res.unshift(fill);
+      len--;
+    }
+    if (len > 0) {
+      res.push(fill);
+      len--;
+    }
   }
   return res.join("");
 }
-console.log(center("abc", 4, "/"));
+// console.log(center("abc", 1, "/"));
+
+var circleArea = function (radius) {
+  if (typeof radius !== "number" || radius <= 0) return false;
+  return +(Math.PI * radius * radius).toFixed(2);
+};
