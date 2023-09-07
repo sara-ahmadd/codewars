@@ -1204,29 +1204,6 @@ function keepOrder(ary, val) {
 // console.log(keepOrder([1, 2, 3, 4, 7], 0));
 // console.log(keepOrder([1, 1, 2, 2, 2], 2));
 
-function stringsConstruction(A, B) {
-  let count_a = {};
-  for (let i = 0; i < A.length; i++) {
-    count_a[A[i]] = (count_a[A[i]] || 0) + 1;
-  }
-
-  let count_b = {};
-  for (let i = 0; i < B.length; i++) {
-    count_b[B[i]] = (count_b[B[i]] || 0) + 1;
-  }
-
-  let count = Number.MAX_VALUE;
-
-  for (let i = 0; i < A.length; i++) {
-    if (count_a[A[i]] !== 0) {
-      count = Math.min(count, count_b[B[i]] / count_a[A[i]]);
-    }
-  }
-  console.log(count_a, count_b);
-  return count;
-}
-// console.log(stringsConstruction("abc", "cbacab"));
-
 function toBytes(n) {
   let bin = n.toString(2);
   console.log(bin);
@@ -1426,6 +1403,7 @@ var circleArea = function (radius) {
   if (typeof radius !== "number" || radius <= 0) return false;
   return +(Math.PI * radius * radius).toFixed(2);
 };
+
 function wordPattern(word) {
   let letters = {};
   word = word.split("").map((x) => x.toLowerCase());
@@ -1469,21 +1447,15 @@ function clockDegree(s) {
 }
 // console.log(clockDegree("-01:00"));
 
+const toRgb = ([r, g, b]) => {
+  let grey = Math.floor((r + g + b) / 3);
+  return [grey, grey, grey];
+};
+
 function color2grey(image) {
-  let level = 0;
-  let sum = 0;
-  let result = [];
-  for (let i of image) {
-    if (i instanceof Array) {
-      continue;
-    } else {
-      sum += i;
-    }
-    console.log(sum / 3);
-    result.push([sum / 3, sum / 3, sum / 3]);
-  }
-  return result;
+  return image.map((x) => x.map((y) => toRgb(y)));
 }
+
 // console.log(
 //   color2grey([
 //     [
@@ -1496,3 +1468,27 @@ function color2grey(image) {
 //     ],
 //   ])
 // );
+
+function stringsConstruction(a, b) {
+  let count = 0;
+  let position;
+  let found = true;
+  b = b.split("");
+
+  while (found) {
+    for (let i = 0; i < a.length; i++) {
+      position = b.indexOf(a[i]);
+      if (position >= 0) {
+        b.splice(position, 1);
+      } else {
+        found = false;
+        break;
+      }
+    }
+    if (found === true) {
+      count++;
+    }
+  }
+  return count;
+}
+// console.log(stringsConstruction("abc", "abccba"));
