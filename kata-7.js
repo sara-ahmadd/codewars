@@ -1492,3 +1492,22 @@ function stringsConstruction(a, b) {
   return count;
 }
 // console.log(stringsConstruction("abc", "abccba"));
+function testit_7(a, b) {
+  return a | b;
+}
+
+function solution_cats_shelves(start, finish) {
+  let res = [];
+  let i = start;
+  while (i < finish) {
+    if (i + 3 > finish) {
+      i += 1;
+      res.push(i);
+    } else {
+      i += 3;
+      res.push(i);
+    }
+  }
+  return res.length;
+}
+console.log(solution_cats_shelves(1, 5));
