@@ -172,26 +172,6 @@ function tailSwap(arr) {
 }
 // console.log(tailSwap(["123:abc", "def:222"]));
 
-function dayAndTime(n) {
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let day = 24 * 60;
-  let time = day + n;
-  let hrs = parseInt(time / 60);
-  let mins = Math.abs(Math.floor(((time / 60) % 1).toFixed(2) * 60));
-
-  hrs = hrs >= 24 ? hrs - 24 : hrs;
-  hrs = hrs > 10 ? hrs : `0${hrs}`;
-  mins = mins > 10 ? mins : `0${mins}`;
-}
-// console.log(dayAndTime(759));
 function eliminateUnsetBits(number) {
   let nums = number.split("").filter((x) => x == 1);
   return parseInt(nums.length > 0 ? nums.join("") : 0, 2);
@@ -1510,4 +1490,52 @@ function solution_cats_shelves(start, finish) {
   }
   return res.length;
 }
-console.log(solution_cats_shelves(1, 5));
+// console.log(solution_cats_shelves(1, 5));
+
+function dayAndTime(n) {
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let hrs = parseInt(n / 60);
+  let mnsRatio = +((n / 60) % 1).toFixed(2);
+  let mns = parseInt(mnsRatio * 60);
+  let count = 0;
+
+  if (n > 0) {
+    while (hrs > 0) {
+      if (hrs - 24 >= 0) {
+        hrs -= 24;
+        count++;
+        if (count > days.length) {
+          count = 0;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+  if (n < 0) {
+    while (hrs > 0) {
+      if (hrs - 24 >= 0) {
+        hrs -= 24;
+        count--;
+        if (count > days.length) {
+          count = 0;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+  return `${days[count]} ${hrs >= 10 ? hrs : "0" + hrs}:${
+    mns > 10 ? mns : "0" + mns
+  }`;
+}
+console.log(dayAndTime(-3));
