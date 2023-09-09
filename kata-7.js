@@ -1491,6 +1491,57 @@ function solution_cats_shelves(start, finish) {
   return res.length;
 }
 // console.log(solution_cats_shelves(1, 5));
+// function dayAndTime(n) {
+//   let days = [
+//     "Sunday",
+//     "Monday",
+//     "Tuesday",
+//     "Wednesday",
+//     "Thursday",
+//     "Friday",
+//     "Saturday",
+//   ];
+
+//   let hrs = parseInt(n / 60);
+//   let mnsRatio = +((n / 60) % 1).toFixed(2);
+//   let mns = parseInt(mnsRatio * 60);
+//   let count = 0;
+
+//   if (n >= 0) {
+//     while (hrs > 0) {
+//       if (hrs - 24 >= 0) {
+//         hrs -= 24;
+//         count++;
+//         if (count > days.length - 1) {
+//           count = 0;
+//         }
+//       } else {
+//         break;
+//       }
+//     }
+//   }
+//   if (n < 0) {
+//     let day = 24 * 60;
+//     hrs = parseInt(n / 60);
+//     mnsRatio = +((n / 60) % 1).toFixed(2);
+//     mns = parseInt(mnsRatio * 60);
+//     count = days.length - 1;
+//     while (hrs < 0) {
+//       if (hrs + 24 <= 0) {
+//         hrs += 24;
+//         count--;
+//         if (count < 0) {
+//           count = days.length - 1;
+//         }
+//       } else {
+//         break;
+//       }
+//     }
+//   }
+//   return `${days[count]} ${hrs >= 10 ? hrs : "0" + hrs}:${
+//     mns >= 10 ? mns : "0" + mns
+//   }`;
+// }
 
 function dayAndTime(n) {
   let days = [
@@ -1503,39 +1554,44 @@ function dayAndTime(n) {
     "Saturday",
   ];
 
-  let hrs = parseInt(n / 60);
-  let mnsRatio = +((n / 60) % 1).toFixed(2);
-  let mns = parseInt(mnsRatio * 60);
-  let count = 0;
+  let date = new Date(0, 0, 0);
+  date.setTime(date.getTime() + n * 60 * 1000);
 
-  if (n > 0) {
-    while (hrs > 0) {
-      if (hrs - 24 >= 0) {
-        hrs -= 24;
-        count++;
-        if (count > days.length) {
-          count = 0;
-        }
-      } else {
-        break;
-      }
-    }
-  }
-  if (n < 0) {
-    while (hrs > 0) {
-      if (hrs - 24 >= 0) {
-        hrs -= 24;
-        count--;
-        if (count > days.length) {
-          count = 0;
-        }
-      } else {
-        break;
-      }
-    }
-  }
-  return `${days[count]} ${hrs >= 10 ? hrs : "0" + hrs}:${
-    mns > 10 ? mns : "0" + mns
-  }`;
+  return `${days[date.getDay()]} ${
+    date.getHours() >= 10 ? date.getHours() : "0" + date.getHours()
+  }:${date.getMinutes() >= 10 ? date.getMinutes() : "0" + date.getMinutes()}`;
 }
-console.log(dayAndTime(-3));
+// console.log(dayAndTime(-349000));
+
+//kyu 6
+function comparePowers(n1, n2) {
+  let num_1 = Math.log10(n1[0]) * n1[1];
+  let num_2 = Math.log10(n2[0]) * n2[1];
+
+  return num_2 === num_1 ? 0 : num_2 < num_1 ? -1 : 1;
+}
+
+// console.log(comparePowers([2, 10], [2, 15]));
+
+function londonCityHacker(journey = []) {
+  let cost = 0;
+  let i = 0;
+  while (i < journey.length) {
+    if (typeof journey[i] === "string") {
+      cost += +(2.4).toFixed(2);
+      console.log("string" + cost);
+      i++;
+    }
+    if (typeof journey[i] === "number" && typeof journey[i + 1] === "number") {
+      cost += +(1.5).toFixed(2);
+      console.log("numbers" + cost);
+      i += 2;
+    } else if (typeof journey[i] === "number") {
+      console.log("number" + cost);
+      cost += +(1.5).toFixed(2);
+      i++;
+    }
+  }
+  return `£${cost.toFixed(2)}`;
+}
+console.log(londonCityHacker([0, 195, 0, 53, 57]));
