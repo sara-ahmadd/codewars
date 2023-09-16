@@ -1594,4 +1594,80 @@ function londonCityHacker(journey = []) {
   }
   return `£${cost.toFixed(2)}`;
 }
-console.log(londonCityHacker([0, 195, 0, 53, 57]));
+// console.log(londonCityHacker([0, 195, 0, 53, 57]));
+
+function solve(s) {
+  s = s.split(/[a-z]/gi).filter((x) => x !== "");
+  return s.reduce((a, b) => (Number(a) > Number(b) ? Number(a) : Number(b)));
+}
+// console.log(solve("gh12cdy695m1"));
+
+function extraPerfect(n) {
+  let arr = [];
+  for (let i = 1; i <= n; i++) {
+    if (i % 2 !== 0) {
+      arr.push(i);
+    }
+  }
+  return arr;
+}
+function sumOfIntegersInString(s) {
+  s = s.split(/\D/gi).filter((x) => Number(x));
+  return s.reduce((a, b) => Number(a) + Number(b), 0);
+}
+// console.log(
+//   sumOfIntegersInString(
+//     "The30quick20brown10f0x1203jumps914ov3r1349the102l4zy dog"
+//   )
+// );
+
+function charConcat(s) {
+  let res = "",
+    count = 1;
+  s = s.split("");
+  if (s.length % 2 === 0) {
+    while (s.length > 0) {
+      res += `${s[0]}${s[s.length - 1]}${count}`;
+      count++;
+      s.splice(0, 1);
+      s.splice(s.length - 1, 1);
+    }
+  } else {
+    while (s.length > 1) {
+      res += `${s[0]}${s[s.length - 1]}${count}`;
+      count++;
+      s.splice(0, 1);
+      s.splice(s.length - 1, 1);
+    }
+  }
+  return res;
+}
+// console.log(charConcat("abc!def"));
+
+function hammingWeight(x) {
+  let binary = "";
+  while (x > 0) {
+    binary = (x % 2) + binary;
+    x = Math.floor(x / 2);
+  }
+  let count = 0;
+  for (let i in binary) {
+    if (binary[i] == "1") {
+      count++;
+    }
+  }
+  return count;
+}
+// console.log(hammingWeight(2));
+
+function countAnimals(animals, count) {
+  let resArr = [];
+  let n = 0;
+  for (let i = 0; i < count.length; i++) {
+    n = animals.match(new RegExp(count[i]))?.length || 0;
+    resArr.push(n);
+    n = 0;
+  }
+  return resArr;
+}
+console.log(countAnimals("dog,cat", ["dog", "cat", "pig"]));
