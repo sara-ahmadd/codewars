@@ -25,12 +25,15 @@ function kebabize(str) {
 
 function alignRight(text, width) {
   let regex = new RegExp("(.{0," + width + "})( |$)", "g");
-  return text
-    .replace(
-      regex,
-      (_, chars) => " ".repeat(width - chars.length) + chars + "\n"
-    )
-    .replace(/\s+$/, "");
+  return (
+    text
+      .replace(
+        regex,
+        (_, chars) => " ".repeat(width - chars.length) + chars + "\n"
+      )
+      //remove whit spaces in the end
+      .replace(/\s+$/, "")
+  );
 }
 // console.log(
 //   alignRight(
@@ -73,10 +76,19 @@ function findChildren(dancingBrigade){
 };
 */
 // console.log(findChildren("AaBaCabbcccc"));
-
-function notPrimes(a, b) {
-  let factors = [];
-  for (let i = a; i <= b; i++) {
-    if(i )
+//2,3,5,7
+let notPrimes = (a, b) => {
+  let arr = [];
+  for (let i = a; i < b; i++) {
+    if (!/[014689]/.test(i)) {
+      for (let j = 2; j <= Math.sqrt(i); j++) {
+        if (i % j === 0) {
+          arr.push(i);
+          break;
+        }
+      }
+    }
   }
-}
+  return arr;
+};
+console.log(notPrimes(2, 222));
