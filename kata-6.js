@@ -91,4 +91,59 @@ let notPrimes = (a, b) => {
   }
   return arr;
 };
-console.log(notPrimes(2, 222));
+// console.log(notPrimes(2, 222));
+
+function lastFibDigit(n) {
+  //last digit sequence of fibonacci numbers repeats in cycles of 60.
+  n = n % 60;
+  let num1 = 0,
+    num2 = 1;
+  for (let i = 2; i <= n; i++) {
+    [num1, num2] = [num2, (num1 + num2) % 10];
+  }
+  return num2;
+}
+// console.log(lastFibDigit(1000000));
+// console.log(302 % 60);
+// function fibonacci(n) {
+//   if (n <= 0) return 0;
+//   if (n === 1) return 1;
+
+//   let fib = new Array(n + 1);
+//   fib[0] = 0;
+//   fib[1] = 1;
+
+//   for (let i = 2; i <= n; i++) {
+//     fib[i] = BigInt(fib[i - 1]) + BigInt(fib[i - 2]);
+//   }
+
+//   let res = fib[n].toString();
+//   return res[res.length - 1];
+// }
+
+// console.log(fibonacci(1000));
+function levenshtein(a, b) {
+  let matched = [];
+  let long = a.length > b.length ? a : b;
+  let short = a.length < b.length ? a : b;
+
+  for (let i = 0; i < long.length; i++) {
+    let position = short.indexOf(long[i]);
+    if (position >= 0) {
+      matched.push(long[i]);
+      short = short.split("");
+      short.splice(position, 1);
+      short = short.join("");
+    }
+  }
+  for (let i = 0; i < matched.length; i++) {
+    let position = long.indexOf(matched[i]);
+    if (position >= 0) {
+      long = long.split("");
+      long.splice(position, 1);
+      long = long.join("");
+    }
+  }
+  return long.length;
+}
+console.log(levenshtein("kitten", "sitting"));
