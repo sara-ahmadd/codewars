@@ -123,27 +123,33 @@ function lastFibDigit(n) {
 
 // console.log(fibonacci(1000));
 function levenshtein(a, b) {
-  let matched = [];
-  let long = a.length > b.length ? a : b;
-  let short = a.length < b.length ? a : b;
-
-  for (let i = 0; i < long.length; i++) {
-    let position = short.indexOf(long[i]);
-    if (position >= 0) {
-      matched.push(long[i]);
-      short = short.split("");
-      short.splice(position, 1);
-      short = short.join("");
+  let lena = a.length;
+  let lenb = b.length;
+  //create matrix to store distances
+  let matrix = Array(lena + 1)
+    .fill(0)
+    .map(() => Array(lenb + 1).fill(0));
+  //initialize rows
+  for (let i = 1; i <= lena; i++) {
+    matrix[i][0] = i;
+  }
+  //initialize columns
+  for (let j = 1; j <= lenb; j++) {
+    matrix[0][j] = j;
+  }
+  //compute distances
+  for (let i = 1; i <= lena; i++) {
+    for (let j = 1; j <= lenb; j++) {
+      if (a[i - 1] == b[j - 1]) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        let a = matrix[i - 1][j - 1],
+          b = matrix[i][j - 1],
+          c = matrix[i - 1][j];
+        matrix[i][j] = 1 + Math.min(a, b, c);
+      }
     }
   }
-  for (let i = 0; i < matched.length; i++) {
-    let position = long.indexOf(matched[i]);
-    if (position >= 0) {
-      long = long.split("");
-      long.splice(position, 1);
-      long = long.join("");
-    }
-  }
-  return long.length;
+  return matrix[lena][lenb];
 }
-console.log(levenshtein("kitten", "sitting"));
+console.log(levenshtein("qqq", "rqq"));
