@@ -152,4 +152,55 @@ function levenshtein(a, b) {
   }
   return matrix[lena][lenb];
 }
-console.log(levenshtein("qqq", "rqq"));
+// console.log(levenshtein("qqq", "rqq"));
+const isPrime = (x) => {
+  if (x < 2) return false;
+  for (let i = 2; i <= Math.sqrt(x); i++) {
+    if (x % i == 0) {
+      return false;
+    }
+  }
+  return true;
+};
+// console.log(isPrime(11));
+const solve = (x, y) => {
+  let count = 0;
+  for (let m = 0; m < 100; m++) {
+    for (let n = 0; n < 100; n++) {
+      let specialPrime = Math.pow(2, m) * Math.pow(3, n) + 1;
+      if (specialPrime >= x && specialPrime <= y && isPrime(specialPrime))
+        count++;
+    }
+  }
+  return count;
+};
+// console.log(solve(0, 15));
+const recursiveSquaringDigitsOfNumber = (n) => {
+  let sum = 0;
+  n = String(n)
+    .split("")
+    .map((x) => (sum += Math.pow(Number(x), 2)))[0];
+  if (sum >= 10) {
+    return recursiveSquaringDigitsOfNumber(sum);
+  } else if (sum < 10 && sum > 1) {
+    return sum;
+  } else {
+    return 1;
+  }
+};
+console.log(recursiveSquaringDigitsOfNumber(25));
+
+const primeReducion = (x, y) => {
+  let primes = [];
+  for (let i = x; i <= y; i++) {
+    if (isPrime(i)) primes.push(i);
+  }
+  let count = 0;
+  primes.forEach((x) => {
+    if (recursiveSquaringDigitsOfNumber(x) === 1) {
+      count++;
+    }
+  });
+  return count;
+};
+console.log(primeReducion(1, 25));
