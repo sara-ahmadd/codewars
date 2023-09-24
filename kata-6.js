@@ -182,13 +182,13 @@ const recursiveSquaringDigitsOfNumber = (n) => {
     .map((x) => (sum += Math.pow(Number(x), 2)))[0];
   if (sum >= 10) {
     return recursiveSquaringDigitsOfNumber(sum);
-  } else if (sum < 10 && sum > 1) {
-    return sum;
-  } else {
-    return 1;
   }
+  if (sum > 1 && sum < 10) {
+    return sum;
+  }
+  if (sum == 1) return 1;
 };
-console.log(recursiveSquaringDigitsOfNumber(25));
+// console.log(recursiveSquaringDigitsOfNumber(7));
 
 const primeReducion = (x, y) => {
   let primes = [];
@@ -203,4 +203,30 @@ const primeReducion = (x, y) => {
   });
   return count;
 };
-console.log(primeReducion(1, 25));
+// console.log(primeReducion(1, 25));
+function count(str) {
+  let count = {};
+  for (let i in str) {
+    count[str[i]] = (count[str[i]] || 0) + 1;
+  }
+  return count;
+}
+// console.log(count(""));
+// console.log(count("zzzsdffs"));
+
+function largestRadialSum(arr = [], d) {
+  let len = arr.length;
+  let maxSum = -Infinity;
+  for (let i = 0; i < len; i++) {
+    let sum = 0;
+    for (let j = 0; j < d; j++) {
+      let index = i + (j * len) / d;
+      sum += arr[index];
+    }
+    if (sum > maxSum) {
+      maxSum = sum;
+    }
+  }
+  return maxSum;
+}
+// console.log(largestRadialSum([-2, -1, -2, -2], 2));
