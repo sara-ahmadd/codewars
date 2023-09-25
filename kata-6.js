@@ -186,9 +186,9 @@ const recursiveSquaringDigitsOfNumber = (n) => {
   if (sum > 1 && sum < 10) {
     return sum;
   }
-  if (sum == 1) return 1;
+  if (sum == 10 || sum == 1) return 1;
 };
-// console.log(recursiveSquaringDigitsOfNumber(7));
+// console.log(recursiveSquaringDigitsOfNumber(25));
 
 const primeReducion = (x, y) => {
   let primes = [];
@@ -230,3 +230,49 @@ function largestRadialSum(arr = [], d) {
   return maxSum;
 }
 // console.log(largestRadialSum([-2, -1, -2, -2], 2));
+
+function findOdd(A) {
+  let count = {};
+  for (let i = 0; i < A.length; i++) {
+    count[A[i]] = (count[A[i]] || 0) + 1;
+  }
+  let entries = Object.entries(count);
+  for (let i = 0; i < entries.length; i++) {
+    if (entries[i][1] % 2 !== 0) {
+      return +entries[i][0];
+    }
+  }
+}
+// console.log(findOdd([1, 1, 2]));
+const validBrackets = (str) => {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === "(" || str[i] == "{" || str[i] == "[") {
+      count++;
+    } else {
+      count--;
+    }
+  }
+  return count === 0;
+};
+// console.log(validBrackets("((()))[[[]]]{{}}"));
+
+function closedBrackets(s) {
+  let a = 0,
+    b = 0;
+  for (let i of s) {
+    if (i == ")") {
+      if (b == 0) return false;
+      b--;
+    } else {
+      b++;
+    }
+    if (i == "(") {
+      a++;
+    } else if (a > 0) {
+      a--;
+    }
+  }
+  return a == 0;
+}
+console.log(closedBrackets("(J))"));
