@@ -275,4 +275,63 @@ function closedBrackets(s) {
   }
   return a == 0;
 }
-console.log(closedBrackets("(J))"));
+// console.log(closedBrackets("(J))"));
+
+function rot(string) {
+  return string.split("").reverse().join("");
+}
+
+function selfieAndRot(strng) {
+  let s = strng
+    .split("\n")
+    .map((x) => x + ".".repeat(x.length))
+    .join("\n");
+
+  let rotatedStr = rot(strng);
+  let newRot = rotatedStr
+    .split("\n")
+    .map((x) => ".".repeat(x.length) + x)
+    .join("\n");
+  return `${s}\n${newRot}`;
+}
+function oper(fct, s) {
+  return fct(s);
+}
+const getSum = (n1, n2) => {
+  let sum = 0;
+  for (let i = n1; i <= n2; i++) {
+    sum += i;
+  }
+  return sum;
+};
+function finance(n) {
+  let count = 0;
+  let val = n;
+  for (let i = 0; i <= n * 2; i += 2, val++) {
+    count += getSum(i, val);
+  }
+  return count;
+}
+// console.log(finance(15));
+function howMuch(m, n) {
+  let cars = 0,
+    boats = 0,
+    smaller = m < n ? m : n,
+    larger = m > n ? m : n;
+  let arr = [];
+  for (let i = smaller; i <= larger; i++) {
+    let obj = {};
+    let product = (i - 2) / 7;
+    let product_2 = (i - 1) / 9;
+    if (product % 1 === 0 && product_2 % 1 === 0) {
+      boats = product;
+      cars = product_2;
+      obj["M"] = i;
+      obj["B"] = boats;
+      obj["C"] = cars;
+      arr.push(Object.entries(obj).map((x) => x.join(": ")));
+    }
+  }
+  return arr;
+}
+console.log(howMuch(10000, 9950));
