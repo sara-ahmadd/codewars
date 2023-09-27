@@ -334,4 +334,59 @@ function howMuch(m, n) {
   }
   return arr;
 }
-console.log(howMuch(10000, 9950));
+// console.log(howMuch(10000, 9950));
+
+// function rotateLeft(tree) {
+//   return tree || null ;
+// }
+
+class Node {
+  constructor(value) {
+    this.left = null;
+    this.right = null;
+    this.value = value;
+  }
+}
+class BinaryTree {
+  constructor() {
+    this.root = null;
+  }
+  isEmpty() {
+    return this.root === null;
+  }
+
+  insertNode(value) {
+    let newNode = new Node(value);
+    if (this.isEmpty()) {
+      this.root = newNode;
+    } else {
+      this.insertNewNode(this.root, newNode);
+    }
+  }
+  insertNewNode(root, newNode) {
+    if (newNode.value < root.value) {
+      if (root.left === null) {
+        root.left = newNode;
+      } else {
+        this.insertNewNode(root.left, newNode);
+      }
+    } else {
+      if (root.right === null) {
+        root.right = newNode;
+      } else {
+        this.insertNewNode(root.right, newNode);
+      }
+    }
+  }
+}
+
+const createTree = (arr) => {
+  let newTree = new BinaryTree();
+  for (let i = 0; i < arr.length; i++) {
+    newTree.insertNode(arr[i]);
+  }
+  console.log(newTree);
+};
+console.log(createTree([9, 7, 11, 5, 8]));
+
+function rotateRight(tree) {}
