@@ -387,6 +387,33 @@ const createTree = (arr) => {
   }
   console.log(newTree);
 };
-console.log(createTree([9, 7, 11, 5, 8]));
+// console.log(createTree([9, 7, 11, 5, 8]));
 
 function rotateRight(tree) {}
+
+let whatTimeIsIt = function (angle) {
+  while (angle > 360) {
+    angle -= 360;
+  }
+  let hr;
+  let min;
+//when its 12 o'clock
+  if (angle >= 0 && angle < 30) {
+    hr = 12;
+  } else {
+    hr = parseInt(angle / 30);
+  }
+  //hour hand moves 1/2 degree for every minuite
+  //minuite = (angle % 30) / (1/2)degree
+  if (angle % 30 > 0) {
+    min = Math.floor((angle % 30) * 2);
+  } else {
+    min = 0;
+  }
+
+  hr = hr >= 10 ? hr : `0${hr}`;
+  min = min >= 10 ? min : `0${min}`;
+
+  return `${hr}:${min}`;
+};
+console.log(whatTimeIsIt(40));
