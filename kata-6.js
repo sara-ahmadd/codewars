@@ -427,6 +427,8 @@ function breakCaesar(st) {
   console.log(st);
 }
 // console.log(breakCaesar("Mjqqt, btwqi!"));
+
+//helper function to  get the longest subsequence of same incrementing values
 const getSequence = (arr) => {
   let vals = [];
   let t = "";
