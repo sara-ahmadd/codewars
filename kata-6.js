@@ -397,7 +397,7 @@ let whatTimeIsIt = function (angle) {
   }
   let hr;
   let min;
-//when its 12 o'clock
+  //when its 12 o'clock
   if (angle >= 0 && angle < 30) {
     hr = 12;
   } else {
@@ -416,4 +416,45 @@ let whatTimeIsIt = function (angle) {
 
   return `${hr}:${min}`;
 };
-console.log(whatTimeIsIt(40));
+// console.log(whatTimeIsIt(40));
+
+function breakCaesar(st) {
+  let alpha = "abcdefghijklmnopqrstuvwxyz";
+  st = st.split("").map((x) => {
+    let ind = (alpha.indexOf(x) - 3) % 26;
+    return alpha[ind];
+  });
+  console.log(st);
+}
+// console.log(breakCaesar("Mjqqt, btwqi!"));
+
+//Find the length of longest subsequence of same incrementing values
+function longestSequenceIn(s = "") {
+  if (s.length === 0) {
+    return 0;
+  } else if (s.split(" ").length === 1) {
+    return 1;
+  } else if (s.length >= 2) {
+    let res = [];
+    s = s.split(" ");
+    for (let i = 0; i < s.length - 1; i++) {
+      let dif = s[i + 1] - s[i];
+      res.push(dif);
+    }
+
+    let txt = "";
+    let final = [];
+    for (let i = 0; i < res.length; i += 1) {
+      txt += res[i];
+      if (res[i + 1] === res[i]) {
+        txt += res[i + 1];
+        i++;
+      } else {
+        final.push(txt);
+        txt = "";
+      }
+    }
+    console.log(final);
+  }
+}
+console.log(longestSequenceIn("10 11 12 1 3 9 15 21 8 9 15 21"));
