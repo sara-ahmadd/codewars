@@ -427,7 +427,22 @@ function breakCaesar(st) {
   console.log(st);
 }
 // console.log(breakCaesar("Mjqqt, btwqi!"));
-
+const getSequence = (arr) => {
+  let vals = [];
+  let t = "";
+  for (let i = 0; i < arr.length; i++) {
+    let n = arr[i];
+    t += `${n},`;
+    if (n !== arr[i + 1]) {
+      vals.push(t);
+      t = "";
+    }
+  }
+  let num = vals
+    .map((x) => x.split(","))
+    .reduce((a, b) => (a.length > b.length ? a : b)).length;
+  return num;
+};
 //Find the length of longest subsequence of same incrementing values
 function longestSequenceIn(s = "") {
   if (s.length === 0) {
@@ -441,20 +456,7 @@ function longestSequenceIn(s = "") {
       let dif = s[i + 1] - s[i];
       res.push(dif);
     }
-
-    let txt = "";
-    let final = [];
-    for (let i = 0; i < res.length; i += 1) {
-      txt += res[i];
-      if (res[i + 1] === res[i]) {
-        txt += res[i + 1];
-        i++;
-      } else {
-        final.push(txt);
-        txt = "";
-      }
-    }
-    console.log(final);
+    return getSequence(res);
   }
 }
-console.log(longestSequenceIn("10 11 12 1 3 9 15 21 8 9 15 21"));
+console.log(longestSequenceIn("10 11 12 13 1 3 9 15 21 8 9 15 21"));
