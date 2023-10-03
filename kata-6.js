@@ -461,4 +461,38 @@ function longestSequenceIn(s = "") {
     return getSequence(res);
   }
 }
-console.log(longestSequenceIn("10 11 12 13 1 3 9 15 21 8 9 15 21"));
+// console.log(longestSequenceIn("10 11 12 13 1 3 9 15 21 8 9 15 21"));
+
+const sumAP = (n, d) => {
+  n = parseInt(n / d);
+  return n * (((n + 1) * parseInt(d)) / 2);
+};
+
+function solution_3and5Mults(n) {
+  n--;
+  return sumAP(n, 3) + sumAP(n, 5) - sumAP(n, 15);
+}
+
+//Another solution
+
+/**
+ * function solution(n){
+let n3 = (n - 1) / 3 | 0, n5 =( n -1 )/ 5 | 0, n15 = (n -1) / 15 | 0
+  return summation(n3) * 3 + summation(n5) * 5- summation(n15) * 15
+}
+
+function summation(n){
+  return n * (n + 1) / 2
+}
+ */
+// console.log(solution_3and5Mults(10));
+function wheatFromChaff(values = []) {
+  for (let i = 0, k = values.length - 1; i < k; ) {
+    while (values[i] < 0) i++;
+    while (values[k] > 0) k--;
+    if (i < k) [values[i], values[k]] = [values[k], values[i]];
+  }
+  return values;
+}
+
+// console.log(wheatFromChaff([-3, 7, 11, -22, 5, -13, -20, -23, -46, 1, 2]));
