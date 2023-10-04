@@ -496,3 +496,69 @@ function wheatFromChaff(values = []) {
 }
 
 // console.log(wheatFromChaff([-3, 7, 11, -22, 5, -13, -20, -23, -46, 1, 2]));
+
+function numPrimorial(n) {
+  let i = 1,
+    arr = [];
+  while (arr.length < n) {
+    if (isPrime(i)) {
+      arr.push(i);
+    }
+    i++;
+  }
+  return arr.reduce((a, b) => a * b);
+}
+// console.log(numPrimorial(3));
+
+multiplicationTable = function (size) {
+  let arr = [],
+    temp = [],
+    final = [];
+  for (let i = 1; i <= size; i++) {
+    arr.push(i);
+  }
+  for (let i = 0; i < arr.length; i++) {
+    temp = arr.map((x) => x * arr[i]);
+    final.push(temp);
+    temp = [];
+  }
+  return final;
+};
+// console.log(multiplicationTable(4));
+let ar = [],
+  old = 2000,
+  newP = 8000;
+for (let i = 1; i <= 6; i++) {
+  if (i % 2 === 0) {
+    newP = newP - newP * (2 / 100);
+    old = old - old * (2 / 100);
+  } else {
+    newP = newP - newP * (1.5 / 100);
+    old = old - old * (1.5 / 100);
+  }
+  ar.push([Math.round(old), Math.round(newP)]);
+}
+// let n1 = ar[ar.length - 1][0];
+// let n2 = ar[ar.length - 1][1];
+// console.log(6000 - (n2 - n1));
+function nbMonths(old, newP, saves, perc) {
+  let left = 0;
+  if (newP > old) {
+    let months = Math.ceil((newP - old) / saves);
+
+    for (let i = 1; i <= months; i++) {
+      if (i % 2 == 0) {
+        perc += 0.5;
+      }
+      newP = newP - newP * (perc / 100);
+      old = old - old * (perc / 100);
+      left = saves * i - (newP - old);
+      if (left >= 0) {
+        return [i, Math.round(left)];
+      }
+    }
+  } else {
+    return [0, old - newP];
+  }
+}
+// console.log(nbMonths(12000, 8000, 1000, 1.5));
