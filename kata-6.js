@@ -562,3 +562,51 @@ function nbMonths(old, newP, saves, perc) {
   }
 }
 // console.log(nbMonths(12000, 8000, 1000, 1.5));
+function doMath(string) {
+  //create object to hold letters
+
+  let ordered = {};
+  let arr = string.split(" ");
+  let arrCopy = arr.slice();
+
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = arr[i].replace(/([0-9])/g, "");
+    ordered[arr[i]] = "";
+  }
+  //attach values to the keys in the created object, only if the values contain the letter in th key of the object
+  arrCopy.forEach((x, i) => {
+    if (x.includes(arr[i])) {
+      ordered[arr[i]] += "," + x;
+    }
+  });
+  //order the object key-value pairs
+  let res = Object.keys(ordered)
+    .sort()
+    .reduce((objEnteries, key) => {
+      objEnteries[key] = ordered[key];
+      return objEnteries;
+    }, {});
+  //take values of the object in a aseparate array to perform the math operations on them
+  let orderedValues = Object.values(res);
+
+  //remove the letters from items in that array
+  for (let i = 0; i < orderedValues.length; i++) {
+    orderedValues[i] = orderedValues[i].replace(/([a-z])/gi, "");
+  }
+
+  //convert all string items into numeric values
+  orderedValues = orderedValues
+    .map((x) => x.split(",").filter((x) => x !== ""))
+    .flat()
+    .map((x) => Number(x));
+
+  let delimiters = ["+", "-", "*", "/"];
+  let num = orderedValues[0];
+
+  for (let i = 1; i < orderedValues.length; i++) {
+    num = eval(`${num}${delimiters[(i - 1) % 4]}${orderedValues[i]}`);
+  }
+  return Math.round(num);
+}
+
+console.log(doMath("10a 90x 14b 78u 45a 7b 34y"));

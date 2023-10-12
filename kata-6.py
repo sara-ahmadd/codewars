@@ -20,3 +20,4 @@ def whatTimeIsIt(ang) :
 
 
 print(whatTimeIsIt(40))
+
